@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Food Court Registration Form</title>
+<!-- metatags-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="food court login form, Responsive Widget, Login form widgets, Sign up Web forms, Flat Pricing table, Flat Drop downs, Registration Forms, News letter Forms, Elements" />
+<script type="application/x-javascript">
+  addEventListener("load", function() {
+    setTimeout(hideURLbar, 0);
+  }, false);
+
+  function hideURLbar() {
+    window.scrollTo(0, 1);
+  }
+</script>
+<!-- Meta tag Keywords -->
+<link href="/static/login_temp/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!--online fonts-->
+<link href="//fonts.googleapis.com/css?family=Lobster&amp;subset=cyrillic,latin-ext,vietnamese" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext" rel="stylesheet">
+<!--//online fonts-->
+<style type="text/css">
+  html {
+    height: 100%
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0
+  }
+
+  #gmap {
+    width: 100%;
+    height: 300px;
+    border: double;
+  }
+
+  .form-sub-w3 input[type="file"] {
+    padding: 10px 15px;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    width: 50%; /* Adjust this value to change the width */
+    border-radius: 5px;
+    margin: 10px auto;
+    display: block;
+  }
+</style>
+</head>
+
+<body onload="initialize()">
+  <h1>Register Form</h1>
+  <div class="wthree-form">
+    <h2>Fill out the form below to Register</h2>
+    <div class="mid-cls" style="background-color: black; opacity: 1; border-radius: 25px;">
+      <form action="/register_post" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-sub-w3">
+          <input type="text" name="textfield" placeholder="Name" required="" />
+        </div>
+        <div class="form-sub-w3">
+          <input type="text" name="textfield2" placeholder="Email" required="" />
+        </div>
+        <div class="form-sub-w3">
+          <input type="text" name="textfield3" placeholder="Contact" required="" />
+        </div>
+        <div class="form-sub-w3">
+          <input type="password" name="textfield6" placeholder="Password" required="" />
+        </div>
+          <div class="form-sub-w3">
+          <input type="file" name="image" accept="image/*" required="" />
+        </div>
+        <div class="form-sub-w3">
+          <div id="gmap"></div>
+          <input type="hidden" name="textfield8" id="lt" class="form-control" required />
+          <input type="hidden" name="textfield9" id="lg" class="form-control" required />
+        </div>
+
+        <div class="submit-agileits">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false"></script>
+  <script type="text/javascript">
+    var map, marker;
+
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(11.868536, 75.363197);
+      var myOptions = {
+        zoom: 7,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+      marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map
+      });
+
+      google.maps.event.addListener(map, "click", function(event) {
+        var clickLat = event.latLng.lat();
+        var clickLon = event.latLng.lng();
+        document.getElementById("lt").value = clickLat.toFixed(5);
+        document.getElementById("lg").value = clickLon.toFixed(5);
+        marker.setPosition(new google.maps.LatLng(clickLat, clickLon));
+      });
+
+      GetMylocation();
+    }
+
+    function GetMylocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      document.getElementById("lt").value = lat;
+      document.getElementById("lg").value = lon;
+
+      var myLatlng = new google.maps.LatLng(lat, lon);
+      map.setCenter(myLatlng);
+      map.setZoom(14);
+      marker.setPosition(myLatlng);
+    }
+  </script>
+</body>
+</html>

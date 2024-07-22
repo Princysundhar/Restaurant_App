@@ -1,0 +1,70 @@
+{% extends 'restaurant/restaurant_index.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>View Payment</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="/restaurant_view_payment_post#aaa" enctype="multipart/form-data">
+{% csrf_token %}
+  <table width="200" border="1" class="table table-bordered">
+    <tr>
+      <th scope="row">Month</th>
+      <td>
+        <select name="select" id="select" class="form-control" required>
+            <option value="select">Select</option>
+          <option value="January">January</option>
+          <option value="Februvary">Februvary</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="september">september</option>
+          <option value="october">october</option>
+          <option value="november">november</option>
+          <option value="december">december</option>
+      </select>
+      </td>
+      <td>Year</td>
+      <td>
+        <select name="select2" id="select2" class="form-control" required>
+          <option value="select">Select</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+      </select></td>
+      <td><input type="submit" name="button" id="button" value="Search" class="btn btn-outline-primary" /></td>
+    </tr>
+  </table>
+  <table width="200" border="1" class="table table-bordered">
+    <tr style="color: black;background-color: #FEA116">
+      <th scope="col">Sl.No</th>
+      <th scope="col">Total</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>&nbsp;{{ forloop.counter }}</td>
+      <td>&nbsp;{{ item.total_amount }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+</html>
+{% endblock %}
+
